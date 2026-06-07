@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-karuta-cream text-karuta-ink antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-lg bg-karuta-red px-6 py-3 font-semibold text-white shadow-md transition hover:bg-red-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply rounded-lg border-2 border-karuta-wood bg-white px-6 py-3 font-semibold text-karuta-wood transition hover:bg-karuta-cream active:scale-95 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .card-panel {
+    @apply rounded-2xl border border-karuta-gold/30 bg-white p-6 shadow-lg;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border-2 border-karuta-gold/40 bg-white px-4 py-3 outline-none transition focus:border-karuta-red focus:ring-2 focus:ring-karuta-red/20;
+  }
+}
