@@ -1,0 +1,16 @@
+{
+  "name": "node-domexception",
+  "version": "2.0.2",
+  "description": "Shim: re-export native DOMException (Node 18+)",
+  "main": "./index.cjs",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs",
+      "default": "./index.cjs"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
