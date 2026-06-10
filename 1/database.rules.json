@@ -1,0 +1,90 @@
+{
+  "rules": {
+    "questions": {
+      ".read": true,
+      "$questionId": {
+        ".write": "!data.exists()",
+        ".validate": "newData.hasChildren(['clue', 'answer', 'contributedBy', 'createdAt', 'status', 'category']) && newData.child('status').val() === 'pending'"
+      }
+    },
+
+    "rooms": {
+      ".read": true,
+      ".write": true
+    },
+
+    "matchmaking": {
+      ".read": true,
+      ".write": true
+    },
+
+    "shares": {
+      ".read": true,
+      "$postId": {
+        ".write": "!data.exists() || newData.hasChildren(['authorId', 'content', 'createdAt'])",
+        ".validate": "newData.hasChildren(['authorId', 'authorName', 'content', 'createdAt', 'likeCount', 'commentCount'])"
+      }
+    },
+
+    "shareLikes": {
+      ".read": true,
+      "$postId": {
+        "$userId": {
+          ".write": true,
+          ".validate": "newData.isBoolean() || !newData.exists()"
+        }
+      }
+    },
+
+    "shareComments": {
+      ".read": true,
+      "$postId": {
+        "$commentId": {
+          ".write": "!data.exists()",
+          ".validate": "newData.hasChildren(['authorId', 'authorName', 'content', 'createdAt'])"
+        }
+      }
+    },
+
+    "shareReports": {
+      "$postId": {
+        "$reporterId": {
+          ".read": true,
+          ".write": "!data.exists()",
+          ".validate": "newData.hasChildren(['postId', 'reporterId', 'createdAt'])"
+        }
+      }
+    },
+
+    "shareSaved": {
+      ".read": true,
+      "$userId": {
+        "$postId": {
+          ".write": true,
+          ".validate": "newData.isBoolean() || !newData.exists()"
+        }
+      }
+    },
+
+    "leaderboard": {
+      ".read": true,
+      "$userId": {
+        ".write": true,
+        ".validate": "newData.hasChildren(['displayName', 'wins', 'losses', 'gamesPlayed', 'winRate', 'updatedAt'])"
+      }
+    },
+
+    "readingStats": {
+      "$userId": {
+        ".read": true,
+        ".write": "auth !== null && auth.uid === $userId",
+        ".validate": "newData.hasChildren(['totalMinutes', 'updatedAt'])",
+        "sessions": {
+          "$sessionId": {
+            ".validate": "newData.hasChildren(['id', 'bookTitle', 'durationMinutes', 'completedAt']) && (!newData.hasChild('pageNumber') || (newData.child('pageNumber').isNumber() && newData.child('pageNumber').val() >= 1))"
+          }
+        }
+      }
+    }
+  }
+}
